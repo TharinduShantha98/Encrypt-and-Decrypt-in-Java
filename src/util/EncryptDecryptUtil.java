@@ -19,6 +19,16 @@ public class EncryptDecryptUtil {
         String encryptedText = encoder.encodeToString(encryptedByte);
         return encryptedText;
 
+    }
+
+    public static String decrypt(String encryptedText , SecretKey secretKey, Cipher cipher) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+
+        Base64.Decoder decoder = Base64.getDecoder();
+        byte[] encryptedTextByte = decoder.decode(encryptedText);
+        cipher.init(cipher.DECRYPT_MODE,secretKey);
+        byte[] decryptedByte = cipher.doFinal(encryptedTextByte);
+        String decryptedText = new String(decryptedByte);
+        return decryptedText;
 
     }
 
